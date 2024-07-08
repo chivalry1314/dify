@@ -27,8 +27,10 @@ class AppGenerateResponseConverter(ABC):
                 def _generate():
                     for chunk in cls.convert_stream_full_response(response):
                         if chunk == 'ping':
+                            logging.debug(f'api response event: {chunk}\n\n')
                             yield f'event: {chunk}\n\n'
                         else:
+                            logging.debug(f'api response data: {chunk}\n\n')
                             yield f'data: {chunk}\n\n'
 
                 return _generate()
